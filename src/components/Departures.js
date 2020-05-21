@@ -9,6 +9,7 @@ const southStation = 'place-sstat';
 function Departures()  {
     const [departures, setDepartures] = useState([]);
     const [station, setStation] = useState(northStation);
+    const [refresh, setRefresh] = useState(true);
 
     const hook = () => {
         (async function getDepartures() {
@@ -18,33 +19,38 @@ function Departures()  {
         })();
     }
 
-    useEffect(hook, [station]);
+    useEffect(hook, [station, refresh]);
 
     return (
-        <div class="departures">
+        <div className="departures">
             <h1>Departures: {station === southStation ? 'South Station' : 'North Station'}</h1>
-            <h2>{ moment().format('MMMM Do YYYY, h:mm A') }</h2>
+            <h2>{ moment().format('MMMM DD, YYYY, h:mm A') }</h2>
             <div>
-                <button onClick={() => setStation(station === southStation ? northStation : southStation)}>
-                    switch to {station === southStation ? 'North Station' : 'South Station'}
+                <button className="button-switch-station" onClick={() => setStation(station === southStation ? northStation : southStation)}>
+                    Switch to {station === southStation ? 'North Station' : 'South Station'}
+                </button>
+                <button onClick={() => setRefresh(!refresh)}>
+                    Refresh
                 </button>
             </div>
             <br/>
             <table>
-                <tr>
-                    <th>Carrier</th>
-                    <th>Time</th>
-                    <th>Destination</th>
-                    <th>Train#</th>
-                    <th>Track#</th>
-                    <th>Status</th>
-                </tr>
-                {departures.map(departure =>
-                    <Departure
-                        key={departure.trainNumber}
-                        departure={departure}
-                    />
-                )}
+                <tbody>
+                    <tr>
+                        <th>Carrier</th>
+                        <th>Time</th>
+                        <th>Destination</th>
+                        <th>Train#</th>
+                        <th>Track#</th>
+                        <th>Status</th>
+                    </tr>
+                    {departures.map(departure =>
+                        <Departure
+                            key={departure.trainNumber}
+                            departure={departure}
+                        />
+                    )}
+                </tbody>
             </table>
         </div>
     );
