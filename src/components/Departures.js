@@ -10,10 +10,13 @@ let Departures = function Departures()  {
     const [departures, setDepartures] = useState([]);
     const [station, setStation] = useState(northStation);
     const [refresh, setRefresh] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     let hook = function hook() {
         (async function getDepartures() {
+            setIsLoading(true);
             const response = await departureService.getAll(station);
+            setIsLoading(false);
             response.sort((a,b) => Date.parse(a.departureTime) - Date.parse(b.departureTime));
             setDepartures(response);
         })();
@@ -34,8 +37,9 @@ let Departures = function Departures()  {
                 </button>
             </div>
             <br/>
-            <table>
-                <tbody>
+            {!isLoading &&
+                <table>
+                    <tbody>
                     <tr>
                         <th>Carrier</th>
                         <th>Time</th>
@@ -50,8 +54,12 @@ let Departures = function Departures()  {
                             departure={departure}
                         />
                     )}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            }
+            {isLoading &&
+                <div>Loading...</div>
+            }
         </div>
     );
 }
