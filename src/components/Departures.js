@@ -39,7 +39,7 @@ let Departures = function Departures()  {
             <br/>
             {!isLoading &&
                 <>
-                    <div>*Times are in EDT</div>
+                    <div>*times are in EDT</div>
                     <table>
                         <tbody>
                         <tr>
