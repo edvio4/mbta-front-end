@@ -37,26 +37,28 @@ let Departures = function Departures()  {
                 </button>
             </div>
             <br/>
-            *times are in EDT
             {!isLoading &&
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Carrier</th>
-                        <th>Time</th>
-                        <th>Destination</th>
-                        <th>Train#</th>
-                        <th>Track#</th>
-                        <th>Status</th>
-                    </tr>
-                    {departures.map(departure =>
-                        <Departure
-                            key={departure.trainNumber}
-                            departure={departure}
-                        />
-                    )}
-                    </tbody>
-                </table>
+                <>
+                    <div>*Times are in EDT</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>Carrier</th>
+                            <th>Time</th>
+                            <th>Destination</th>
+                            <th>Train#</th>
+                            <th>Track#</th>
+                            <th>Status</th>
+                        </tr>
+                        {departures.map(departure =>
+                            <Departure
+                                key={departure.trainNumber}
+                                departure={departure}
+                            />
+                        )}
+                        </tbody>
+                    </table>
+                </>
             }
             {isLoading &&
                 <div>Loading...</div>
