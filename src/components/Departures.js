@@ -23,7 +23,7 @@ function Departures()  {
 
     return (
         <div className="departures">
-            <h1>Departures: {station === southStation ? 'South Station' : 'North Station'}</h1>
+            <h1>{station === southStation ? 'South Station' : 'North Station'} Departures</h1>
             <h2>{ moment().format('MMMM D, YYYY, h:mm A') }</h2>
             <div>
                 <button className="button-switch-station" onClick={() => setStation(station === southStation ? northStation : southStation)}>
