@@ -1,28 +1,16 @@
 import React from 'react';
+import moment from 'moment';
 
 function Departure({ departure }) {
     return (
-        <>
-            <li>
-                Carrier: { departure.carrier }
-            </li>
-            <li>
-                Time: { departure.departureTime }
-            </li>
-            <li>
-                Destination: { departure.destination }
-            </li>
-            <li>
-                Train#: { departure.trainNumber }
-            </li>
-            <li>
-                Track#: { departure.trackNumber }
-            </li>
-            <li>
-                Status: { departure.status }
-            </li>
-            ------
-        </>
+        <tr>
+            <td>{ departure.carrier }</td>
+            <td>{ moment(departure.departureTime).format('h:mm A') }</td>
+            <td>{ departure.destination }</td>
+            <td>{ departure.trainNumber }</td>
+            <td>{ departure.trackNumber || 'TBD' }</td>
+            <td>{ departure.status }</td>
+        </tr>
     );
 }
 

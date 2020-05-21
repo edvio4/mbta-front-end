@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Departure from './Departure';
 import departureService from '../services/departures';
+import moment from 'moment';
 
 const northStation = 'place-north';
 const southStation = 'place-sstat';
@@ -20,21 +21,31 @@ function Departures()  {
     useEffect(hook, [station]);
 
     return (
-        <div>
+        <div class="departures">
             <h1>Departures: {station === southStation ? 'South Station' : 'North Station'}</h1>
+            <h2>{ moment().format('MMMM Do YYYY, h:mm A') }</h2>
             <div>
                 <button onClick={() => setStation(station === southStation ? northStation : southStation)}>
                     switch to {station === southStation ? 'North Station' : 'South Station'}
                 </button>
             </div>
-            <ul>
+            <br/>
+            <table>
+                <tr>
+                    <th>Carrier</th>
+                    <th>Time</th>
+                    <th>Destination</th>
+                    <th>Train#</th>
+                    <th>Track#</th>
+                    <th>Status</th>
+                </tr>
                 {departures.map(departure =>
                     <Departure
                         key={departure.trainNumber}
                         departure={departure}
                     />
                 )}
-            </ul>
+            </table>
         </div>
     );
 }
