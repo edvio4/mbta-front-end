@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-function Departure({ departure }) {
+let Departure = function Departure({ departure }) {
     return (
         <tr>
             <td>{ departure.carrier }</td>

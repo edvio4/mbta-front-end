@@ -6,12 +6,12 @@ import moment from 'moment';
 const northStation = 'place-north';
 const southStation = 'place-sstat';
 
-function Departures()  {
+let Departures = function Departures()  {
     const [departures, setDepartures] = useState([]);
     const [station, setStation] = useState(northStation);
     const [refresh, setRefresh] = useState(true);
 
-    const hook = function hook() {
+    let hook = function hook() {
         (async function getDepartures() {
             const response = await departureService.getAll(station);
             response.sort((a,b) => Date.parse(a.departureTime) - Date.parse(b.departureTime));
