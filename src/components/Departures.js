@@ -11,7 +11,7 @@ function Departures()  {
     const [station, setStation] = useState(northStation);
     const [refresh, setRefresh] = useState(true);
 
-    const hook = () => {
+    const hook = function hook() {
         (async function getDepartures() {
             const response = await departureService.getAll(station);
             response.sort((a,b) => Date.parse(a.departureTime) - Date.parse(b.departureTime));
