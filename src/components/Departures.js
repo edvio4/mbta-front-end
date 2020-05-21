@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Departure from './Departure';
 import departureService from '../services/departures';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 const northStation = 'place-north';
 const southStation = 'place-sstat';
@@ -27,7 +27,7 @@ let Departures = function Departures()  {
     return (
         <div className="departures">
             <h1>{station === southStation ? 'South Station' : 'North Station'} Departures</h1>
-            <h2>{ moment().format('MMMM D, YYYY, h:mm A') }</h2>
+            <h2>{ moment().tz('America/New_York').format('MMMM D, YYYY, h:mm A z') }</h2>
             <div>
                 <button className="button-switch-station" onClick={() => setStation(station === southStation ? northStation : southStation)}>
                     Switch to {station === southStation ? 'North Station' : 'South Station'}
@@ -37,6 +37,7 @@ let Departures = function Departures()  {
                 </button>
             </div>
             <br/>
+            *times are in EDT
             {!isLoading &&
                 <table>
                     <tbody>
